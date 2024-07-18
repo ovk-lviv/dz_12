@@ -32,6 +32,7 @@ public class Man extends Person {
         setPartner(true);
     }
 
+
     public void deregisterPartnership() {
         setPartner(false);
     }
