@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Tests Selection">
+    <test name="Getters">
+                <classes>
+            <class name="TestProject.ManTest">
+                <methods>
+                    <include name="getAgeTest"/>
+                    <include name="getLastNameTest"/>
+                    <include name="getStatus"/>
+
+                </methods>
+            </class>
+                    <class name="TestProject.WomanTest">
+                        <methods>
+                            <include name="getAgeTest"/>
+                            <include name="getLastNameTest"/>
+                            <include name="getStatus"/>
+
+                        </methods>
+                    </class>
+        </classes>
+    </test>
+    <test name="Setters">
+        <classes>
+            <class name="TestProject.WomanTest">
+                <methods>
+                <include name="setMaidenNameTest"/>
+
+
+             </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
