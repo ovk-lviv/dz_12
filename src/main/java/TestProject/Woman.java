@@ -4,8 +4,8 @@ public class Woman extends Person {
     private String maidenName;
 
 
-    public Woman(String firstName, String lastName, int age, boolean partner) {
-        super(firstName, lastName, age, partner);
+    public Woman(String firstName, String lastName, int age, boolean partner, String gender) {
+        super(firstName, lastName, age, partner, gender);
     }
 
     public String getLastName() {
@@ -22,17 +22,12 @@ public class Woman extends Person {
         return super.isPartner();
     }
 
-    public boolean isRetired() {
-        if (this.getAge() > 60) {
-            return true;
-        }
-        return false;
-    }
 
-    public void setMaidenName() {
+    public void setMaidenName(Man m) {
         if (!this.isPartner())
             this.maidenName = this.getLastName();
     }
+
 
 
     public String getMaidenName() {
@@ -48,7 +43,7 @@ public class Woman extends Person {
 
     public void deregisterPartnership(Man m) {
         m.setPartner(false);
-        setLastName(this.maidenName);
+        setLastName(this.getLastName());
         setPartner(false);
 
     }

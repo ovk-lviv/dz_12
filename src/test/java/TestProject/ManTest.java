@@ -5,48 +5,47 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 
-
 public class ManTest {
-//checks if age can be retrieved and the age is correct
-    @Test(testName = "Getter for age")
-    public void getAgeTest() {
-        Man m = new Man("John", "Doe", 54, false);
-        Assert.assertEquals(m.getAge(), 54, "Wrong age");
-    }
-//checks if last name can be retrieved and it is correct
-    @Test(testName = "Getter for Last Name")
-    public void getLastNameTest () {
-        Man m = new Man ("John", "Doe", 54, false);
-        Assert.assertEquals(m.getLastName(), "Doe", "Last Name does not correspond");
+
+
+    @Test(testName = "Getter for age", dataProvider = "check age", dataProviderClass = BaseTest.class)
+    public void getAgeTest(int age) {
+        Man m = new Man("John", "Doe", age, false, "male");
+        Assert.assertEquals(m.getAge(), age, "Wrong age");
     }
 
-// checks if status is retrieved and it is correct
-    @Test(testName = "Getter for status")
-    public void getStatus () {
-        Man m = new Man ("John", "Doe", 54, false);
-        Assert.assertEquals(m.isPartner(), false, "Wrong status");
+
+    @Test(testName = "Getter for Last Name", dataProvider = "check last name", dataProviderClass = BaseTest.class)
+    public void getLastNameTest(String lname) {
+        Man m = new Man("John", lname, 54, false, "male");
+        Assert.assertEquals(m.getLastName(), lname, "Last Name does not correspond");
     }
 
-// checks if calculation for retirement status is correct
-    @Test(testName = "Correct retirement status")
-    public void isRetiredTest () {
-        Man m = new Man ("John", "Doe", 54, false);
-        Assert.assertFalse(m.isRetired(), "Wrong calculation");
+
+    @Test(testName = "Getter for status", dataProvider = "check status", dataProviderClass = BaseTest.class)
+    public void getStatus(boolean status) {
+        Man m = new Man("John", "Doe", 54, status, "male");
+        Assert.assertEquals(m.isPartner(), status, "Wrong status");
     }
 
-//checks if marital status updated (person married)
-    @Test(testName = "Register marriage")
-    public void isMarriedTest () {
-        Man m = new Man ("John", "Doe", 54, false);
+    // it would be more correct probably if I had PersonTest class....
+    @Test(testName = "Correct retirement status", dataProvider = "check retirement age", dataProviderClass = BaseTest.class)
+    public void isRetiredTest(Person p, boolean retired) {
+
+        Assert.assertEquals(p.isRetired(), retired, "Wrong calculation");
+    }
+
+    //тут трохи некоректний тест, оскільки перевіряє статус.  а не сам факт зміни статусу. Тільки  для засвоєння метріалу уроку.
+    @Test(testName = "Register marriage", dataProvider = "check marital status register", dataProviderClass = BaseTest.class)
+    public void isMarriedTest(Man m, boolean married) {
         m.registerPartnership();
-        Assert.assertTrue(m.isPartner(), "Marital status was not updated");
+        Assert.assertEquals(m.isPartner(), married, "Marital status was not updated");
     }
 
-//checks if marital status is updated (person divorced)
-    @Test(testName = "Deregister marriage")
-    public void isDivorcedTest () {
-        Man m = new Man ("John", "Doe", 54, true);
+    //checks if marital status is updated (person divorced)
+    @Test(testName = "Deregister marriage", dataProvider = "check marital status deregister", dataProviderClass = BaseTest.class)
+    public void isDivorcedTest(Man m, boolean status) {
         m.deregisterPartnership();
-        Assert.assertFalse(m.isPartner(), "Marital status was not updated");
+        Assert.assertEquals(m.isPartner(), status, "Marital status was not updated");
     }
 }
