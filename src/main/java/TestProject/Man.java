@@ -2,8 +2,8 @@ package TestProject;
 
 public class Man extends Person {
 
-    public Man(String firstName, String lastName, int age, boolean partner) {
-        super(firstName, lastName, age, partner);
+    public Man(String firstName, String lastName, int age, boolean partner, String gender) {
+        super(firstName, lastName, age, partner, gender);
 
     }
 
@@ -21,15 +21,15 @@ public class Man extends Person {
         return super.isPartner();
     }
 
-    public boolean isRetired() {
-        if (this.getAge() > 65) {
-            return true;
-        }
-        return false;
+    public String getGender() {
+        return super.getGender();
     }
 
+
     public void registerPartnership() {
-        setPartner(true);
+        if (!this.isPartner()) {
+            setPartner(true);
+        }
     }
 
 
